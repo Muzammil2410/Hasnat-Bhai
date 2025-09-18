@@ -1,11 +1,12 @@
 'use client'
 import BestSelling from "@/components/BestSelling";
 import Hero from "@/components/Hero";
-import Newsletter from "@/components/Newsletter";
+import Testimonials from "@/components/Testimonials";
 import OurSpecs from "@/components/OurSpec";
 import LatestProducts from "@/components/LatestProducts";
 import PictureBoxes from "@/components/PictureBoxes";
 import SportsSection from "@/components/SportsSection";
+import ShopByCategory from "@/components/ShopByCategory";
 
 export default function Home() {
     return (
@@ -15,8 +16,9 @@ export default function Home() {
             <PictureBoxes />
             <BestSelling />
             <SportsSection />
+            <ShopByCategory />
             <OurSpecs />
-            <Newsletter />
+            <Testimonials />
         </div>
     );
 }

@@ -40,25 +40,27 @@ const Footer = () => {
     ];
 
     const socialIcons = [
-        { icon: FacebookIcon, link: "https://www.facebook.com" },
-        { icon: InstagramIcon, link: "https://www.instagram.com" },
-        { icon: TwitterIcon, link: "https://twitter.com" },
-        { icon: LinkedinIcon, link: "https://www.linkedin.com" },
+        { icon: FacebookIcon, link: "https://www.facebook.com", hoverColor: "hover:bg-blue-600", iconHoverColor: "group-hover:stroke-white" },
+        { icon: InstagramIcon, link: "https://www.instagram.com", hoverColor: "hover:bg-gradient-to-r hover:from-pink-500 hover:to-purple-600", iconHoverColor: "group-hover:stroke-white" },
+        { icon: TwitterIcon, link: "https://twitter.com", hoverColor: "hover:bg-blue-400", iconHoverColor: "group-hover:stroke-white" },
+        { icon: LinkedinIcon, link: "https://www.linkedin.com", hoverColor: "hover:bg-blue-700", iconHoverColor: "group-hover:stroke-white" },
     ]
 
     return (
         <footer className="mx-6 bg-white">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-slate-500/30 text-slate-500">
+                <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-200 text-gray-600">
                     <div>
-                        <Link href="/" className="text-4xl font-semibold text-slate-700">
-                            <span className="text-slate-600">Basi</span>rota<span className="text-slate-600 text-5xl leading-0">.</span>
+                        <Link href="/" className="text-4xl font-semibold text-gray-800">
+                            <span className="text-blue-600">Basi</span>rota<span className="text-blue-600 text-5xl leading-0">.</span>
                         </Link>
                         <p className="max-w-[410px] mt-6 text-sm">Welcome to Basirota, your ultimate destination for the latest and smartest gadgets. From smartphones and smartwatches to essential accessories, we bring you the best in innovation — all in one place.</p>
                         <div className="flex items-center gap-3 mt-5">
                             {socialIcons.map((item, i) => (
-                                <Link href={item.link} key={i} className="flex items-center justify-center w-10 h-10 bg-slate-100 hover:scale-105 hover:border border-slate-300 transition rounded-full">
-                                    <item.icon />
+                                <Link href={item.link} key={i} className={`group flex items-center justify-center w-10 h-10 bg-gray-50 border border-gray-200 hover:scale-110 hover:border-transparent transition-all duration-300 rounded-full ${item.hoverColor}`}>
+                                    <div className={item.iconHoverColor}>
+                                        <item.icon />
+                                    </div>
                                 </Link>
                             ))}
                         </div>
@@ -66,7 +68,7 @@ const Footer = () => {
                     <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5 text-sm ">
                         {linkSections.map((section, index) => (
                             <div key={index}>
-                                <h3 className="font-medium text-slate-700 md:mb-5 mb-3">{section.title}</h3>
+                                <h3 className="font-medium text-gray-800 md:mb-5 mb-3">{section.title}</h3>
                                 <ul className="space-y-2.5">
                                     {section.links.map((link, i) => (
                                         <li key={i} className="flex items-center gap-2">
@@ -79,7 +81,7 @@ const Footer = () => {
                         ))}
                     </div>
                 </div>
-                <p className="py-4 text-sm text-slate-500">
+                <p className="py-4 text-sm text-gray-600">
                     Copyright 2025 © Basirota All Right Reserved.
                 </p>
             </div>

@@ -4,6 +4,17 @@ import upload_area from "./upload_area.svg"
 import hero_model_img from "./hero_model_img.png"
 import hero_product_img1 from "./hero_product_img1.png"
 import hero_product_img2 from "./hero_product_img2.png"
+import kap_all_banner from "./kap-all-banner.jpg"
+import slide_1 from "./slide-1.jpg"
+import slider_2 from "./slider-2.jpg"
+import tech_image from "./1.jpg"
+import appliances_image from "./2.jpg"
+import automotive_image from "./3.jpg"
+import baby_image from "./4.jpg"
+import book_image from "./5.jpg"
+import fashion_image from "./6.jpg"
+import beauty_image from "./7.jpg"
+import personal_care_image from "./8.jpg"
 import product_img1 from "./product_img1.png"
 import product_img2 from "./product_img2.png"
 import product_img3 from "./product_img3.png"
@@ -22,7 +33,8 @@ import profile_pic2 from "./profile_pic2.jpg"
 import profile_pic3 from "./profile_pic3.jpg"
 
 export const assets = {
-    upload_area, hero_model_img,
+    upload_area, hero_model_img, kap_all_banner, slide_1, slider_2, 
+    tech_image, appliances_image, automotive_image, baby_image, book_image, fashion_image, beauty_image, personal_care_image,
     hero_product_img1, hero_product_img2, gs_logo,
     product_img1, product_img2, product_img3, product_img4, product_img5, product_img6,
     product_img7, product_img8, product_img9, product_img10, product_img11, product_img12,
