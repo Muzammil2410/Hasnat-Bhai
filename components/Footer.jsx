@@ -81,9 +81,44 @@ const Footer = () => {
                         ))}
                     </div>
                 </div>
-                <p className="py-4 text-sm text-gray-600">
-                    Copyright 2025 © Basirota All Right Reserved.
-                </p>
+                
+                {/* Payment Methods Strip */}
+                <div className="flex flex-col sm:flex-row items-center justify-between py-4 border-t border-gray-200">
+                    <p className="text-sm text-gray-600 mb-4 sm:mb-0">
+                        Copyright 2025 © Basirota All Right Reserved.
+                    </p>
+                    
+                    <div className="flex items-center gap-3 flex-wrap">
+                        {/* VISA */}
+                        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg px-4 py-2 flex items-center justify-center min-w-[60px]">
+                            <div className="text-white font-bold text-lg tracking-wider">VISA</div>
+                        </div>
+                        
+                        {/* Stripe */}
+                        <div className="bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg px-4 py-2 flex items-center justify-center min-w-[70px]">
+                            <div className="text-white font-semibold text-sm">Stripe</div>
+                        </div>
+                        
+                        {/* Mastercard */}
+                        <div className="bg-gradient-to-r from-red-500 to-orange-500 rounded-lg px-4 py-2 flex items-center justify-center min-w-[80px]">
+                            <div className="flex items-center gap-1">
+                                <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                                <div className="w-4 h-4 bg-yellow-400 rounded-full -ml-2"></div>
+                                <span className="text-white font-bold text-xs ml-2">Mastercard</span>
+                            </div>
+                        </div>
+                        
+                        {/* American Express */}
+                        <div className="bg-gradient-to-r from-green-600 to-green-800 rounded-lg px-4 py-2 flex items-center justify-center min-w-[90px]">
+                            <div className="text-white font-semibold text-xs">American Express</div>
+                        </div>
+                        
+                        {/* Discover */}
+                        <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg px-4 py-2 flex items-center justify-center min-w-[75px]">
+                            <div className="text-white font-bold text-sm">Discover</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </footer>
     );
