@@ -1,8 +1,8 @@
 'use client'
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
@@ -10,12 +10,54 @@ const Navbar = () => {
     const router = useRouter();
 
     const [search, setSearch] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('All')
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const cartCount = useSelector(state => state.cart.total)
+    const dropdownRef = useRef(null)
+
+    const categories = [
+        'All',
+        'Appliances',
+        'Automotive parts and accessories',
+        'Baby',
+        'Beauty and personal care',
+        'Books',
+        'Fashion',
+        'Girls/women\'s clothing',
+        'Groceries',
+        'Health',
+        'Housewares',
+        'Men\'s/boys\' clothing',
+        'Pet supplies',
+        'Sports',
+        'Technology',
+        'Toys & games',
+        'Travel'
+    ]
 
     const handleSearch = (e) => {
         e.preventDefault()
-        router.push(`/shop?search=${search}`)
+        router.push(`/shop?search=${search}&category=${selectedCategory}`)
     }
+
+    const handleCategorySelect = (category) => {
+        setSelectedCategory(category)
+        setIsDropdownOpen(false)
+    }
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
 
     return (
         <nav className="relative bg-white">
@@ -31,15 +73,63 @@ const Navbar = () => {
 
                     {/* Desktop Menu */}
                     <div className="hidden sm:flex items-center gap-4 lg:gap-8 text-gray-600">
-                        <Link href="/" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">Home</Link>
-                        <Link href="/shop" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">Shop</Link>
-                        <Link href="/" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">About</Link>
-                        <Link href="/" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">Contact</Link>
-
-                        <form onSubmit={handleSearch} className="hidden lg:flex items-center w-xs text-sm gap-2 bg-gray-50 border border-gray-200 px-4 py-3 rounded-full hover:bg-gray-100 hover:border-gray-300 transition-all duration-200 focus-within:bg-white focus-within:border-blue-300 focus-within:shadow-md">
-                            <Search size={18} className="text-gray-600" />
-                            <input className="w-full bg-transparent outline-none placeholder-gray-600 focus:placeholder-gray-400 transition-colors duration-200" type="text" placeholder="Search products" value={search} onChange={(e) => setSearch(e.target.value)} required />
+                        <form onSubmit={handleSearch} className="hidden lg:flex items-center w-[500px] text-sm bg-gray-50 border border-gray-200 rounded-full hover:bg-gray-100 hover:border-gray-300 transition-all duration-200 focus-within:bg-white focus-within:border-blue-300 focus-within:shadow-md">
+                            {/* Category Dropdown */}
+                            <div className="relative flex-shrink-0" ref={dropdownRef}>
+                                <button
+                                    type="button"
+                                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                    className={`flex items-center gap-2 py-3 text-gray-600 hover:text-gray-800 transition-all duration-200 border-r border-gray-200 ${
+                                        selectedCategory.length > 15 
+                                            ? 'min-w-[120px] px-4' 
+                                            : 'px-3'
+                                    }`}
+                                >
+                                    <span className="text-sm font-medium truncate">
+                                        {selectedCategory.length > 15 
+                                            ? selectedCategory.substring(0, 15) + '...' 
+                                            : selectedCategory
+                                        }
+                                    </span>
+                                    <ChevronDown size={16} className={`transition-transform duration-200 flex-shrink-0 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                                </button>
+                                
+                                {/* Dropdown Menu */}
+                                {isDropdownOpen && (
+                                    <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-80 overflow-y-auto">
+                                        {categories.map((category, index) => (
+                                            <button
+                                                key={index}
+                                                type="button"
+                                                onClick={() => handleCategorySelect(category)}
+                                                className={`w-full text-left px-4 py-3 text-sm hover:bg-blue-50 transition-colors duration-200 ${
+                                                    category === selectedCategory 
+                                                        ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                                                        : 'text-gray-700'
+                                                }`}
+                                            >
+                                                {category}
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            
+                            {/* Search Input */}
+                            <div className="flex items-center gap-2 px-4 py-3 flex-1 min-w-0">
+                                <Search size={18} className="text-gray-600 flex-shrink-0" />
+                                <input 
+                                    className="w-full bg-transparent outline-none placeholder-gray-600 focus:placeholder-gray-400 transition-colors duration-200 min-w-0" 
+                                    type="text" 
+                                    placeholder="Search..." 
+                                    value={search} 
+                                    onChange={(e) => setSearch(e.target.value)} 
+                                    required 
+                                />
+                            </div>
                         </form>
+
+                        <Link href="/shop" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">Shop</Link>
 
                         <Link href="/cart" className="relative flex items-center gap-2 text-gray-600 hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">
                             <ShoppingCart size={18} className="hover:scale-110 transition-transform duration-200" />
