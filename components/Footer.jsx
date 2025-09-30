@@ -21,9 +21,10 @@ const Footer = () => {
                 ...featuredProducts.map(product => ({
                     text: product.name,
                     path: `/product/${product.id}`,
-                    icon: null
+                    icon: null,
+                    isBold: true
                 })),
-                { text: "View All Products", path: '/shop', icon: null }
+                { text: "View All Products", path: '/shop', icon: null, isBold: false }
             ]
         },
         {
@@ -32,7 +33,7 @@ const Footer = () => {
                 { text: "Home", path: '/', icon: null },
                 { text: "Privacy Policy", path: '/', icon: null },
                 { text: "Become Plus Member", path: '/pricing', icon: null },
-                { text: "Become a Seller", path: '/create-store', icon: null },
+                { text: "Become a Seller", path: '/seller/register', icon: null },
             ]
         },
         {
@@ -79,7 +80,12 @@ const Footer = () => {
                                     {section.links.map((link, i) => (
                                         <li key={i} className="flex items-center gap-2">
                                             {link.icon && <link.icon />}
-                                            <Link href={link.path} className="hover:underline transition">{link.text}</Link>
+                                            <Link 
+                                                href={link.path} 
+                                                className={`hover:underline transition ${link.isBold ? 'font-semibold' : ''}`}
+                                            >
+                                                {link.text}
+                                            </Link>
                                         </li>
                                     ))}
                                 </ul>
