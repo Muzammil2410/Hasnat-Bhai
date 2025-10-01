@@ -87,9 +87,9 @@ const Navbar = () => {
             <div className="mx-6">
                 <div className="flex items-center justify-between max-w-7xl mx-auto py-4  transition-all">
 
-                    <Link href="/" className="relative text-4xl font-semibold text-gray-800 hover:scale-105 transition-transform duration-200">
-                        <span className="text-blue-600 hover:text-blue-800 transition-colors duration-200">Basi</span>rota<span className="text-blue-600 hover:text-blue-800 text-5xl leading-0 transition-colors duration-200">.</span>
-                        <p className="absolute text-xs font-semibold -top-1 -right-8 px-3 p-0.5 rounded-full flex items-center gap-2 text-white bg-blue-600 hover:bg-blue-800 transition-colors duration-200">
+                    <Link href="/" className="relative text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-800 hover:scale-105 transition-transform duration-200">
+                        <span className="text-blue-600 hover:text-blue-800 transition-colors duration-200">Basi</span>rota<span className="text-blue-600 hover:text-blue-800 text-3xl sm:text-4xl lg:text-5xl leading-0 transition-colors duration-200">.</span>
+                        <p className="absolute text-[10px] sm:text-xs font-semibold -top-0.5 sm:-top-1 -right-6 sm:-right-8 px-2 sm:px-3 p-0.5 rounded-full flex items-center gap-1 sm:gap-2 text-white bg-blue-600 hover:bg-blue-800 transition-colors duration-200">
                             plus
                         </p>
                     </Link>
@@ -243,20 +243,25 @@ const Navbar = () => {
 
                     </div>
 
-                    {/* Mobile User Button  */}
-                    <div className="sm:hidden">
+                    {/* Mobile Menu */}
+                    <div className="sm:hidden flex items-center gap-2">
+                        {/* Mobile Search Button */}
+                        <button className="p-2 text-gray-600 hover:text-blue-800 transition-colors">
+                            <Search size={20} />
+                        </button>
+                        
                         {user ? (
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1">
                                 <Link href="/cart" className="relative p-2 text-gray-600 hover:text-blue-800 transition-colors">
                                     <ShoppingCart size={20} />
                                     {cartCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-blue-600 size-4 rounded-full flex items-center justify-center">{cartCount}</span>
+                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-blue-600 size-4 rounded-full flex items-center justify-center font-medium">{cartCount}</span>
                                     )}
                                 </Link>
                                 <Link href="/profile?tab=wishlist" className="relative p-2 text-gray-600 hover:text-blue-800 transition-colors">
                                     <Heart size={20} />
                                     {wishlistCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-red-500 size-4 rounded-full flex items-center justify-center">{wishlistCount}</span>
+                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-red-500 size-4 rounded-full flex items-center justify-center font-medium">{wishlistCount}</span>
                                     )}
                                 </Link>
                                 <Link href="/profile" className="p-2 text-gray-600 hover:text-blue-800 transition-colors">
@@ -264,12 +269,12 @@ const Navbar = () => {
                                 </Link>
                             </div>
                         ) : (
-                            <Link href="/auth/login" className="relative px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 text-white rounded-full font-semibold shadow-md hover:shadow-blue-500/25 group overflow-hidden text-sm">
+                            <Link href="/auth/login" className="relative px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 text-white rounded-full font-semibold shadow-md hover:shadow-blue-500/25 group overflow-hidden text-sm">
                                 <span className="relative z-10 flex items-center gap-1.5">
                                     <svg className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                     </svg>
-                                    Login
+                                    <span className="hidden xs:inline">Login</span>
                                 </span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
                             </Link>

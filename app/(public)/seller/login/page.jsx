@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react'
+import { Eye, EyeOff, Mail, Lock, ArrowLeft, Store } from 'lucide-react'
 import toast from 'react-hot-toast'
 
-export default function LoginPage() {
+export default function SellerLoginPage() {
     const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -12,12 +12,6 @@ export default function LoginPage() {
         email: '',
         password: ''
     })
-
-    // Demo credentials
-    const demoCredentials = {
-        email: 'demo@basirota.com',
-        password: 'demo123'
-    }
 
     const handleInputChange = (e) => {
         setFormData({
@@ -33,31 +27,39 @@ export default function LoginPage() {
         // Simulate API call
         await new Promise(resolve => setTimeout(resolve, 1000))
 
-        // Check demo credentials for regular users
-        if (formData.email === demoCredentials.email && formData.password === demoCredentials.password) {
-            toast.success('Login successful!')
-            // Store user session (in real app, this would be handled by auth provider)
-            localStorage.setItem('user', JSON.stringify({
-                id: 'user_1',
-                name: 'Demo User',
-                email: 'demo@basirota.com',
-                image: '/api/placeholder/40/40'
-            }))
-            router.push('/profile')
+        // Check seller credentials from localStorage
+        const sellerProfile = localStorage.getItem('sellerProfile')
+        
+        if (sellerProfile) {
+            try {
+                const sellerData = JSON.parse(sellerProfile)
+                
+                if (formData.email === sellerData.email && formData.password === sellerData.password) {
+                    toast.success('Seller login successful!')
+                    // Store seller session
+                    localStorage.setItem('sellerSession', JSON.stringify({
+                        id: 'seller_1',
+                        name: sellerData.fullName,
+                        email: sellerData.email,
+                        businessName: sellerData.businessName
+                    }))
+                    router.push('/seller/dashboard')
+                } else {
+                    toast.error('Invalid seller credentials. Please check your email and password.')
+                }
+            } catch (error) {
+                console.error('Error parsing seller profile:', error)
+                toast.error('Error loading seller profile. Please try registering again.')
+            }
         } else {
-            toast.error('Invalid credentials. Use demo@basirota.com / demo123')
+            toast.error('No seller account found. Please register as a seller first.')
         }
 
         setLoading(false)
     }
 
-    const fillDemoCredentials = () => {
-        setFormData(demoCredentials)
-    }
-
-
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4">
             <div className="max-w-md w-full">
                 {/* Back to Home */}
                 <button 
@@ -71,32 +73,36 @@ export default function LoginPage() {
                 {/* Login Card */}
                 <div className="bg-white rounded-2xl shadow-xl p-8">
                     <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+                            <Store className="w-8 h-8 text-green-600" />
+                        </div>
                         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                            Welcome Back
+                            Seller Login
                         </h1>
                         <p className="text-gray-600">
-                            Sign in to your Basirota account
+                            Sign in to your seller account
                         </p>
                     </div>
 
-
-                    {/* Demo Credentials Banner */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                        <h3 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials</h3>
-                        <p className="text-xs text-blue-600 mb-3">Use these credentials to login:</p>
-                        <div className="text-xs text-blue-700 space-y-1">
-                            <p><strong>Email:</strong> demo@basirota.com</p>
-                            <p><strong>Password:</strong> demo123</p>
+                    {/* Seller Login Info */}
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+                        <h3 className="text-sm font-medium text-green-800 mb-2">Seller Login</h3>
+                        <p className="text-xs text-green-600 mb-3">Use your seller registration credentials:</p>
+                        <div className="text-xs text-green-700 space-y-1">
+                            <p><strong>Email:</strong> The email you used during seller registration</p>
+                            <p><strong>Password:</strong> The password you set during registration</p>
                         </div>
-                        <button
-                            type="button"
-                            onClick={fillDemoCredentials}
-                            className="mt-3 text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors"
-                        >
-                            Fill Demo Credentials
-                        </button>
+                        <p className="text-xs text-green-600 mt-2">
+                            Don't have a seller account?{' '}
+                            <button
+                                type="button"
+                                onClick={() => router.push('/seller/register')}
+                                className="text-green-700 font-medium hover:underline"
+                            >
+                                Register as Seller
+                            </button>
+                        </p>
                     </div>
-
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* Email Field */}
@@ -112,7 +118,7 @@ export default function LoginPage() {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
-                                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                                     placeholder="Enter your email"
                                     required
                                 />
@@ -132,7 +138,7 @@ export default function LoginPage() {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleInputChange}
-                                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
                                     placeholder="Enter your password"
                                     required
                                 />
@@ -149,13 +155,13 @@ export default function LoginPage() {
                         {/* Remember Me & Forgot Password */}
                         <div className="flex items-center justify-between">
                             <label className="flex items-center">
-                                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                                <input type="checkbox" className="rounded border-gray-300 text-green-600 focus:ring-green-500" />
                                 <span className="ml-2 text-sm text-gray-600">Remember me</span>
                             </label>
                             <button 
                                 type="button"
                                 onClick={() => router.push('/auth/forgot-password')}
-                                className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                                className="text-sm text-green-600 hover:text-green-800 transition-colors"
                             >
                                 Forgot password?
                             </button>
@@ -165,22 +171,22 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-3 px-4 rounded-lg focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500"
+                            className="w-full py-3 px-4 rounded-lg focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium bg-green-600 text-white hover:bg-green-700 focus:ring-green-500"
                         >
-                            {loading ? 'Signing in...' : 'Sign In'}
+                            {loading ? 'Signing in as Seller...' : 'Sign In as Seller'}
                         </button>
                     </form>
 
                     {/* Sign Up Link */}
                     <div className="mt-6 text-center">
                         <p className="text-gray-600">
-                            Don't have an account?{' '}
+                            Don't have a seller account?{' '}
                             <button 
                                 type="button"
-                                onClick={() => router.push('/auth/register')}
-                                className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                                onClick={() => router.push('/seller/register')}
+                                className="text-green-600 hover:text-green-800 font-medium transition-colors"
                             >
-                                Sign up
+                                Register as Seller
                             </button>
                         </p>
                     </div>

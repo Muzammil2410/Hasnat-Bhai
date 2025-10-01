@@ -9,13 +9,13 @@ const Testimonials = () => {
     const testimonials = dummyRatingsData.slice(0, 3)
 
     return (
-        <div className='px-6 my-30 max-w-6xl mx-auto'>
+        <div className='px-4 sm:px-6 my-16 sm:my-20 lg:my-30 max-w-6xl mx-auto'>
             <div className='text-center mb-12'>
-                <h2 className='text-3xl font-semibold text-gray-800 mb-4'>What Our Customers Say</h2>
+                <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4'>What Our Customers Say</h2>
                 <p className='text-gray-600 max-w-2xl mx-auto'>Don't just take our word for it. Here's what our satisfied customers have to say about their shopping experience with Basirota.</p>
             </div>
             
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8'>
                 {testimonials.map((testimonial, index) => (
                     <div key={index} className='bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 h-80 flex flex-col'>
                         {/* Star Rating */}

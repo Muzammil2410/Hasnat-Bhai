@@ -42,7 +42,14 @@ export default function ProfilePage() {
 
         setUser(JSON.parse(userData))
         setOrders(orderDummyData)
-        setAddresses([addressDummyData])
+        
+        // Load addresses from localStorage or use default
+        const savedAddresses = localStorage.getItem('userAddresses')
+        if (savedAddresses) {
+            setAddresses(JSON.parse(savedAddresses))
+        } else {
+            setAddresses([addressDummyData])
+        }
     }, [router])
 
     const handleLogout = () => {
@@ -54,13 +61,16 @@ export default function ProfilePage() {
     const handleAddressSubmit = (e) => {
         e.preventDefault()
         
+        let updatedAddresses
+        
         if (editingAddress) {
             // Update existing address
-            setAddresses(addresses.map(addr => 
+            updatedAddresses = addresses.map(addr => 
                 addr.id === editingAddress.id 
-                    ? { ...addr, ...addressForm }
+                    ? { ...addr, ...addressForm, updatedAt: new Date().toISOString() }
                     : addr
-            ))
+            )
+            setAddresses(updatedAddresses)
             toast.success('Address updated successfully')
         } else {
             // Add new address
@@ -69,9 +79,13 @@ export default function ProfilePage() {
                 ...addressForm,
                 createdAt: new Date().toISOString()
             }
-            setAddresses([...addresses, newAddress])
+            updatedAddresses = [...addresses, newAddress]
+            setAddresses(updatedAddresses)
             toast.success('Address added successfully')
         }
+        
+        // Save to localStorage
+        localStorage.setItem('userAddresses', JSON.stringify(updatedAddresses))
         
         setShowAddressModal(false)
         setEditingAddress(null)
@@ -94,7 +108,9 @@ export default function ProfilePage() {
     }
 
     const handleDeleteAddress = (addressId) => {
-        setAddresses(addresses.filter(addr => addr.id !== addressId))
+        const updatedAddresses = addresses.filter(addr => addr.id !== addressId)
+        setAddresses(updatedAddresses)
+        localStorage.setItem('userAddresses', JSON.stringify(updatedAddresses))
         toast.success('Address deleted successfully')
     }
 
@@ -299,10 +315,16 @@ export default function ProfilePage() {
                                                     </div>
                                                 </div>
                                                 <div className="text-sm text-gray-600 space-y-1">
-                                                    <p>{address.street}</p>
+                                                    <p className="font-medium">{address.street}</p>
                                                     <p>{address.city}, {address.state} {address.zip}</p>
                                                     <p>{address.country}</p>
-                                                    <p>{address.phone}</p>
+                                                    <p className="text-blue-600">{address.phone}</p>
+                                                    {address.email && <p className="text-blue-600">{address.email}</p>}
+                                                    {address.updatedAt && (
+                                                        <p className="text-xs text-gray-500 mt-2">
+                                                            Updated: {new Date(address.updatedAt).toLocaleDateString()}
+                                                        </p>
+                                                    )}
                                                 </div>
                                             </div>
                                         ))}

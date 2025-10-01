@@ -130,11 +130,11 @@ export default function SellerRegister() {
       console.log('Seller Registration Data:', formData)
       
       // Show success toast
-      toast.success('Registration completed! Redirecting to your dashboard...')
+      toast.success('Registration completed! Please login with your credentials...')
       
-      // Redirect after 2 seconds
+      // Redirect to seller login after 2 seconds
       setTimeout(() => {
-        router.push('/seller/dashboard')
+        router.push('/seller/login')
       }, 2000)
       
     } catch (error) {

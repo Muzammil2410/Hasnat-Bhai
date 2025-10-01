@@ -70,7 +70,7 @@ const ShopByCategory = () => {
     }
 
     return (
-        <div className='px-6 my-20 max-w-7xl mx-auto'>
+        <div className='px-4 sm:px-6 my-16 sm:my-20 max-w-7xl mx-auto'>
             <div className='text-center mb-12 sm:mb-16'>
                 <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4'>SHOP BY CATEGORY</h2>
                 <p className='text-sm sm:text-base text-gray-600 max-w-2xl mx-auto px-4'>Discover our wide range of products organized by category for easy browsing</p>
@@ -101,12 +101,12 @@ const ShopByCategory = () => {
                     >
                         {Array.from({ length: totalSlides }).map((_, slideIndex) => (
                             <div key={slideIndex} className='w-full flex-shrink-0'>
-                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8'>
+                                <div className='grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 px-2 sm:px-4 lg:px-8'>
                                     {categories
                                         .slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide)
                                         .map((category, index) => (
                                         <div key={index} className='group cursor-pointer'>
-                                            <div className='relative w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 mx-auto mb-4 sm:mb-6 rounded-full overflow-hidden bg-white border-4 border-gray-100 shadow-lg group-hover:shadow-2xl group-hover:scale-105 group-hover:border-blue-200 transition-all duration-500'>
+                                            <div className='relative w-32 h-32 sm:w-48 sm:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 mx-auto mb-3 sm:mb-4 lg:mb-6 rounded-full overflow-hidden bg-white border-2 sm:border-4 border-gray-100 shadow-lg group-hover:shadow-2xl group-hover:scale-105 group-hover:border-blue-200 transition-all duration-500'>
                                                 {category.image ? (
                                                     <Image 
                                                         src={category.image} 

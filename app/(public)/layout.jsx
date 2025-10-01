@@ -24,8 +24,11 @@ export default function PublicLayout({ children }) {
     // Check if current path is home page
     const isHomePage = pathname === '/'
     
-    // Check if current path is seller dashboard
+    // Check if current path is seller dashboard (but not the main seller page)
     const isSellerPage = pathname.startsWith('/seller/')
+    
+    // Check if current path is the main seller choice page
+    const isSellerChoicePage = pathname === '/seller'
 
     // If user is logged in and NOT on home page or auth page, don't show navbar/header/banner
     if (user && !isAuthPage && !isHomePage) {
@@ -36,10 +39,22 @@ export default function PublicLayout({ children }) {
         )
     }
 
-    // For auth pages and seller pages, show ONLY the content (no navbar, banner, or categories)
+    // For auth pages and seller dashboard pages, show ONLY the content (no navbar, banner, or categories)
     if (isAuthPage || isSellerPage) {
         return (
             <>
+                {children}
+            </>
+        )
+    }
+
+    // For seller choice page, show header and navbar but NO footer
+    if (isSellerChoicePage) {
+        return (
+            <>
+                <Banner />
+                <Navbar />
+                <CategoriesMarquee />
                 {children}
             </>
         )

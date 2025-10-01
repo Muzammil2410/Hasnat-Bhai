@@ -22,7 +22,7 @@ const Footer = () => {
                     text: product.name,
                     path: `/product/${product.id}`,
                     icon: null,
-                    isBold: true
+                    isBold: false
                 })),
                 { text: "View All Products", path: '/shop', icon: null, isBold: false }
             ]
@@ -33,7 +33,7 @@ const Footer = () => {
                 { text: "Home", path: '/', icon: null },
                 { text: "Privacy Policy", path: '/', icon: null },
                 { text: "Become Plus Member", path: '/pricing', icon: null },
-                { text: "Become a Seller", path: '/seller/register', icon: null },
+                { text: "Become a Seller", path: '/seller', icon: null },
             ]
         },
         {
@@ -75,7 +75,7 @@ const Footer = () => {
                     <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5 text-sm ">
                         {linkSections.map((section, index) => (
                             <div key={index}>
-                                <h3 className="font-medium text-gray-800 md:mb-5 mb-3">{section.title}</h3>
+                                <h3 className="font-bold text-gray-800 md:mb-5 mb-3">{section.title}</h3>
                                 <ul className="space-y-2.5">
                                     {section.links.map((link, i) => (
                                         <li key={i} className="flex items-center gap-2">
