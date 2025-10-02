@@ -12,11 +12,11 @@ const OurSpecs = () => {
                 {
                     ourSpecsData.map((spec, index) => {
                         return (
-                            <div className='relative h-44 px-8 flex flex-col items-center justify-center w-full text-center border rounded-lg group' style={{ backgroundColor: spec.accent + 10, borderColor: spec.accent + 30 }} key={index}>
-                                <h3 className='text-slate-800 font-medium'>{spec.title}</h3>
-                                <p className='text-sm text-slate-600 mt-3'>{spec.description}</p>
-                                <div className='absolute -top-5 text-white size-10 flex items-center justify-center rounded-md group-hover:scale-105 transition' style={{ backgroundColor: spec.accent }}>
-                                    <spec.icon size={20} />
+                            <div className='relative h-40 sm:h-44 px-4 sm:px-8 flex flex-col items-center justify-center w-full text-center border rounded-lg group' style={{ backgroundColor: spec.accent + 10, borderColor: spec.accent + 30 }} key={index}>
+                                <h3 className='text-slate-800 font-medium text-sm sm:text-base'>{spec.title}</h3>
+                                <p className='text-xs sm:text-sm text-slate-600 mt-2 sm:mt-3'>{spec.description}</p>
+                                <div className='absolute -top-4 sm:-top-5 text-white size-8 sm:size-10 flex items-center justify-center rounded-md group-hover:scale-105 transition' style={{ backgroundColor: spec.accent }}>
+                                    <spec.icon size={16} className="sm:w-5 sm:h-5" />
                                 </div>
                             </div>
                         )

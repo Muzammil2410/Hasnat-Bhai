@@ -7,7 +7,7 @@ const StoreNavbar = () => {
     return (
         <div className="flex items-center justify-between px-12 py-3 border-b border-gray-200 transition-all">
             <Link href="/" className="relative text-4xl font-semibold text-gray-800">
-                <span className="text-blue-600">Basi</span>rota<span className="text-blue-600 text-5xl leading-0">.</span>
+                <span className="text-blue-600">Ziz</span>la<span className="text-blue-600 text-5xl leading-0">.</span>
                 <p className="absolute text-xs font-semibold -top-1 -right-11 px-3 p-0.5 rounded-full flex items-center gap-2 text-white bg-blue-600">
                     Store
                 </p>

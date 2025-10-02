@@ -75,7 +75,7 @@ function ShopContent() {
     }
 
     return (
-        <div className="min-h-[70vh] mx-6">
+        <div className="min-h-[70vh] mx-3 sm:mx-6">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between my-6 gap-4">

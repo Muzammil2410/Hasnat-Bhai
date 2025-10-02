@@ -418,7 +418,7 @@ export default function SellerRegister() {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Become a Seller</h1>
-          <p className="text-gray-600 mt-2">Join Basirota and start selling your products</p>
+          <p className="text-gray-600 mt-2">Join Zizla and start selling your products</p>
         </div>
 
         {/* Progress Bar - Mobile */}

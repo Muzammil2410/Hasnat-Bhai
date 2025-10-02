@@ -1,10 +1,13 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
+import { clearCart } from "@/lib/features/cart/cartSlice"
 import { Package, Users, TrendingUp, DollarSign, Plus, Eye, LogOut } from 'lucide-react'
 
 export default function SellerDashboard() {
   const router = useRouter()
+  const dispatch = useDispatch()
   const [sellerData, setSellerData] = useState(null)
   const [products, setProducts] = useState([])
 
@@ -63,6 +66,9 @@ export default function SellerDashboard() {
     localStorage.removeItem('sellerProfile')
     localStorage.removeItem('products')
     localStorage.removeItem('draftProduct')
+    
+    // Clear cart when user logs out
+    dispatch(clearCart())
     
     // Redirect to home page
     router.push('/')
@@ -123,7 +129,7 @@ export default function SellerDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Message */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-6 text-white mb-8">
-          <h2 className="text-xl font-semibold mb-2">Welcome to Basirota Seller Center!</h2>
+          <h2 className="text-xl font-semibold mb-2">Welcome to Zizla Seller Center!</h2>
           <p className="text-blue-100">
             Your seller account has been created successfully. You can now start adding products and managing your store.
           </p>

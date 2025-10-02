@@ -1,6 +1,6 @@
-# Contributing to Basirota
+# Contributing to Zizla
 
-Thank you for considering contributing to **Basirota**!
+Thank you for considering contributing to **Zizla**!
 We welcome contributions from everyone, whether it's fixing a bug, adding a new feature, or optimizing the codebase.
 
 ---

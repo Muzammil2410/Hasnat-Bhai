@@ -1,14 +1,18 @@
 'use client'
 import { Search, ShoppingCart, ChevronDown, User, LogOut, Heart } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
+import { assets } from '@/assets/assets';
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "@/lib/features/cart/cartSlice";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const [search, setSearch] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('All')
@@ -53,6 +57,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('user')
         setUser(null)
+        dispatch(clearCart()) // Clear cart when user logs out
         toast.success('Logged out successfully')
         router.push('/auth/login')
     }
@@ -84,19 +89,26 @@ const Navbar = () => {
 
     return (
         <nav className="relative bg-white">
-            <div className="mx-6">
-                <div className="flex items-center justify-between max-w-7xl mx-auto py-4  transition-all">
+            <div className="mx-3 sm:mx-6">
+                <div className="flex items-center justify-between max-w-7xl mx-auto py-3 sm:py-4 transition-all">
 
-                    <Link href="/" className="relative text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-800 hover:scale-105 transition-transform duration-200">
-                        <span className="text-blue-600 hover:text-blue-800 transition-colors duration-200">Basi</span>rota<span className="text-blue-600 hover:text-blue-800 text-3xl sm:text-4xl lg:text-5xl leading-0 transition-colors duration-200">.</span>
-                        <p className="absolute text-[10px] sm:text-xs font-semibold -top-0.5 sm:-top-1 -right-6 sm:-right-8 px-2 sm:px-3 p-0.5 rounded-full flex items-center gap-1 sm:gap-2 text-white bg-blue-600 hover:bg-blue-800 transition-colors duration-200">
-                            plus
-                        </p>
+                    <Link href="/" className="hover:scale-105 transition-transform duration-200">
+                        <Image 
+                            src={assets.zizla_logo} 
+                            alt="Zizla Logo" 
+                            width={350} 
+                            height={140} 
+                            className="h-16 xs:h-20 sm:h-24 md:h-28 lg:h-32 w-auto"
+                            style={{ 
+                                backgroundColor: 'transparent',
+                                filter: 'contrast(1.2) brightness(1.1)'
+                            }}
+                        />
                     </Link>
 
                     {/* Desktop Menu */}
-                    <div className="hidden sm:flex items-center gap-4 lg:gap-8 text-gray-600">
-                        <form onSubmit={handleSearch} className="hidden lg:flex items-center w-[500px] text-sm bg-gray-50 border border-gray-200 rounded-full hover:bg-gray-100 hover:border-gray-300 transition-all duration-200 focus-within:bg-white focus-within:border-blue-300 focus-within:shadow-md">
+                    <div className="hidden sm:flex items-center gap-2 md:gap-4 lg:gap-8 text-gray-600 flex-1">
+                        <form onSubmit={handleSearch} className="hidden md:flex items-center flex-1 max-w-[600px] text-sm bg-gray-50 border border-gray-200 rounded-full hover:bg-gray-100 hover:border-gray-300 transition-all duration-200 focus-within:bg-white focus-within:border-blue-300 focus-within:shadow-md">
                             {/* Category Dropdown */}
                             <div className="relative flex-shrink-0" ref={dropdownRef}>
                                 <button
@@ -152,12 +164,14 @@ const Navbar = () => {
                             </div>
                         </form>
 
-                        <Link href="/shop" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">Shop</Link>
+                        <Link href="/shop" className="hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium text-sm lg:text-base">Shop</Link>
 
-                        <Link href="/cart" className="relative flex items-center gap-2 text-gray-600 hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">
-                            <ShoppingCart size={18} className="hover:scale-110 transition-transform duration-200" />
-                            Cart
-                            <button className="absolute -top-1 left-3 text-[8px] text-white bg-blue-600 size-3.5 rounded-full hover:bg-blue-800 hover:scale-110 transition-all duration-200">{cartCount}</button>
+                        <Link href="/cart" className="relative flex items-center gap-1 lg:gap-2 text-gray-600 hover:text-blue-800 hover:bg-blue-50 hover:px-3 hover:py-2 hover:rounded-full hover:scale-105 transition-all duration-200 font-medium">
+                            <ShoppingCart size={16} className="lg:w-[18px] lg:h-[18px] hover:scale-110 transition-transform duration-200" />
+                            <span className="hidden lg:inline text-sm lg:text-base">Cart</span>
+                            {cartCount > 0 && (
+                                <span className="absolute -top-1 left-3 text-[8px] text-white bg-blue-600 size-3.5 rounded-full hover:bg-blue-800 hover:scale-110 transition-all duration-200 flex items-center justify-center">{cartCount}</span>
+                            )}
                         </Link>
 
                         {user ? (
@@ -230,12 +244,13 @@ const Navbar = () => {
                                 </div>
                             </div>
                         ) : (
-                            <Link href="/auth/login" className="relative px-8 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 text-white rounded-full font-semibold shadow-md hover:shadow-blue-500/25 group overflow-hidden">
-                                <span className="relative z-10 flex items-center gap-2">
-                                    <svg className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <Link href="/auth/login" className="relative px-4 lg:px-8 py-2 lg:py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 text-white rounded-full font-semibold shadow-md hover:shadow-blue-500/25 group overflow-hidden text-sm lg:text-base">
+                                <span className="relative z-10 flex items-center gap-1 lg:gap-2">
+                                    <svg className="w-3.5 lg:w-4 h-3.5 lg:h-4 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                     </svg>
-                                    Login / Register
+                                    <span className="hidden sm:inline">Login / Register</span>
+                                    <span className="sm:hidden">Login</span>
                                 </span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
                             </Link>
@@ -244,34 +259,34 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Menu */}
-                    <div className="sm:hidden flex items-center gap-2">
+                    <div className="sm:hidden flex items-center gap-1 xs:gap-2">
                         {/* Mobile Search Button */}
-                        <button className="p-2 text-gray-600 hover:text-blue-800 transition-colors">
-                            <Search size={20} />
+                        <button className="p-1.5 xs:p-2 text-gray-600 hover:text-blue-800 transition-colors">
+                            <Search size={18} className="xs:w-5 xs:h-5" />
                         </button>
                         
                         {user ? (
-                            <div className="flex items-center gap-1">
-                                <Link href="/cart" className="relative p-2 text-gray-600 hover:text-blue-800 transition-colors">
-                                    <ShoppingCart size={20} />
+                            <div className="flex items-center gap-0.5 xs:gap-1">
+                                <Link href="/cart" className="relative p-1.5 xs:p-2 text-gray-600 hover:text-blue-800 transition-colors">
+                                    <ShoppingCart size={18} className="xs:w-5 xs:h-5" />
                                     {cartCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-blue-600 size-4 rounded-full flex items-center justify-center font-medium">{cartCount}</span>
+                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-blue-600 size-3.5 xs:size-4 rounded-full flex items-center justify-center font-medium">{cartCount}</span>
                                     )}
                                 </Link>
-                                <Link href="/profile?tab=wishlist" className="relative p-2 text-gray-600 hover:text-blue-800 transition-colors">
-                                    <Heart size={20} />
+                                <Link href="/profile?tab=wishlist" className="relative p-1.5 xs:p-2 text-gray-600 hover:text-blue-800 transition-colors">
+                                    <Heart size={18} className="xs:w-5 xs:h-5" />
                                     {wishlistCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-red-500 size-4 rounded-full flex items-center justify-center font-medium">{wishlistCount}</span>
+                                        <span className="absolute -top-1 -right-1 text-[8px] text-white bg-red-500 size-3.5 xs:size-4 rounded-full flex items-center justify-center font-medium">{wishlistCount}</span>
                                     )}
                                 </Link>
-                                <Link href="/profile" className="p-2 text-gray-600 hover:text-blue-800 transition-colors">
-                                    <User size={20} />
+                                <Link href="/profile" className="p-1.5 xs:p-2 text-gray-600 hover:text-blue-800 transition-colors">
+                                    <User size={18} className="xs:w-5 xs:h-5" />
                                 </Link>
                             </div>
                         ) : (
-                            <Link href="/auth/login" className="relative px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 text-white rounded-full font-semibold shadow-md hover:shadow-blue-500/25 group overflow-hidden text-sm">
-                                <span className="relative z-10 flex items-center gap-1.5">
-                                    <svg className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <Link href="/auth/login" className="relative px-3 xs:px-4 py-1.5 xs:py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 text-white rounded-full font-semibold shadow-md hover:shadow-blue-500/25 group overflow-hidden text-xs xs:text-sm">
+                                <span className="relative z-10 flex items-center gap-1 xs:gap-1.5">
+                                    <svg className="w-3 xs:w-3.5 h-3 xs:h-3.5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                                     </svg>
                                     <span className="hidden xs:inline">Login</span>

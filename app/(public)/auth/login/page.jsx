@@ -15,7 +15,7 @@ export default function LoginPage() {
 
     // Demo credentials
     const demoCredentials = {
-        email: 'demo@basirota.com',
+        email: 'demo@zizla.com',
         password: 'demo123'
     }
 
@@ -40,12 +40,12 @@ export default function LoginPage() {
             localStorage.setItem('user', JSON.stringify({
                 id: 'user_1',
                 name: 'Demo User',
-                email: 'demo@basirota.com',
+                email: 'demo@zizla.com',
                 image: '/api/placeholder/40/40'
             }))
             router.push('/profile')
         } else {
-            toast.error('Invalid credentials. Use demo@basirota.com / demo123')
+            toast.error('Invalid credentials. Use demo@zizla.com / demo123')
         }
 
         setLoading(false)
@@ -75,7 +75,7 @@ export default function LoginPage() {
                             Welcome Back
                         </h1>
                         <p className="text-gray-600">
-                            Sign in to your Basirota account
+                            Sign in to your Zizla account
                         </p>
                     </div>
 
@@ -85,7 +85,7 @@ export default function LoginPage() {
                         <h3 className="text-sm font-medium text-blue-800 mb-2">Demo Credentials</h3>
                         <p className="text-xs text-blue-600 mb-3">Use these credentials to login:</p>
                         <div className="text-xs text-blue-700 space-y-1">
-                            <p><strong>Email:</strong> demo@basirota.com</p>
+                            <p><strong>Email:</strong> demo@zizla.com</p>
                             <p><strong>Password:</strong> demo123</p>
                         </div>
                         <button

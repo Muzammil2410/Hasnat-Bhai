@@ -12,7 +12,7 @@ const Testimonials = () => {
         <div className='px-4 sm:px-6 my-16 sm:my-20 lg:my-30 max-w-6xl mx-auto'>
             <div className='text-center mb-12'>
                 <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4'>What Our Customers Say</h2>
-                <p className='text-gray-600 max-w-2xl mx-auto'>Don't just take our word for it. Here's what our satisfied customers have to say about their shopping experience with Basirota.</p>
+                <p className='text-gray-600 max-w-2xl mx-auto'>Don't just take our word for it. Here's what our satisfied customers have to say about their shopping experience with Zizla.</p>
             </div>
             
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8'>

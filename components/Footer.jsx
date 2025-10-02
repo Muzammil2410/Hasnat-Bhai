@@ -54,14 +54,14 @@ const Footer = () => {
     ]
 
     return (
-        <footer className="mx-6 bg-white">
+        <footer className="mx-3 sm:mx-6 bg-white">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 border-b border-gray-200 text-gray-600">
+                <div className="flex flex-col md:flex-row items-start justify-between gap-8 sm:gap-10 py-8 sm:py-10 border-b border-gray-200 text-gray-600">
                     <div>
                         <Link href="/" className="text-4xl font-semibold text-gray-800">
-                            <span className="text-blue-600">Basi</span>rota<span className="text-blue-600 text-5xl leading-0">.</span>
+                            <span className="text-blue-600">Ziz</span>la<span className="text-blue-600 text-5xl leading-0">.</span>
                         </Link>
-                        <p className="max-w-[410px] mt-6 text-sm">Welcome to Basirota, your ultimate destination for the latest and smartest gadgets. From smartphones and smartwatches to essential accessories, we bring you the best in innovation — all in one place.</p>
+                        <p className="max-w-[410px] mt-6 text-sm">Welcome to Zizla, your ultimate destination for the latest and smartest gadgets. From smartphones and smartwatches to essential accessories, we bring you the best in innovation — all in one place.</p>
                         <div className="flex items-center gap-3 mt-5">
                             {socialIcons.map((item, i) => (
                                 <Link href={item.link} key={i} className={`group flex items-center justify-center w-10 h-10 bg-gray-50 border border-gray-200 hover:scale-110 hover:border-transparent transition-all duration-300 rounded-full ${item.hoverColor}`}>
@@ -97,7 +97,7 @@ const Footer = () => {
                 {/* Payment Methods Strip */}
                 <div className="flex flex-col sm:flex-row items-center justify-between py-4 border-t border-gray-200">
                     <p className="text-sm text-gray-600 mb-4 sm:mb-0">
-                        Copyright 2025 © Basirota All Right Reserved.
+                        Copyright 2025 © Zizla All Right Reserved.
                     </p>
                     
                     <div className="flex items-center gap-3 flex-wrap">

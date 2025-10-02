@@ -28,7 +28,7 @@ const Hero = () => {
             <div className='flex flex-col xl:flex-row gap-6 xl:gap-8 max-w-7xl mx-auto my-6 sm:my-10'>
                 <div className='relative flex-1 flex flex-col rounded-2xl xl:rounded-3xl min-h-[300px] sm:min-h-[400px] xl:min-h-[500px] group shadow-sm overflow-hidden'>
                     <Image 
-                        className='w-full h-full object-cover object-center absolute inset-0 transition-opacity duration-500' 
+                        className='w-full h-full object-cover object-right sm:object-center absolute inset-0 transition-opacity duration-500' 
                         src={heroImages[currentImageIndex]} 
                         alt="Hero Banner"
                         fill
@@ -36,18 +36,15 @@ const Hero = () => {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className='relative z-10 p-4 sm:p-8 xl:p-16 flex flex-col justify-center h-full'>
-                        {/* Background overlay for better text readability */}
-                        <div className='absolute inset-0 bg-black/20 sm:bg-black/10'></div>
-                        
-                        <div className='relative z-20'>
+                        <div className='relative z-20 max-w-xs sm:max-w-md lg:max-w-lg'>
                             <div className='inline-flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-sm border border-gray-200 text-gray-700 pr-3 sm:pr-4 p-1 rounded-full text-xs sm:text-sm hover:bg-blue-50 hover:border-blue-200 hover:text-blue-800 transition-all duration-200 mb-3 sm:mb-4'>
                                 <span className='bg-blue-600 px-2 sm:px-3 py-1 rounded-full text-white text-xs'>NEWS</span> 
                                 <span className='hidden sm:inline'>Free Shipping on Orders Above $150!</span>
                                 <span className='sm:hidden'>Free Shipping Above $150!</span>
                                 <ChevronRightIcon className='group-hover:ml-2 transition-all' size={14} />
                             </div>
-                            <h2 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl leading-[1.2] mb-3 sm:mb-4 font-bold text-white drop-shadow-lg max-w-xs sm:max-w-md'>
-                                <span className="text-blue-300 hover:text-blue-200 transition-colors duration-200">Basi</span>rota you'll love. Prices you'll trust.
+                            <h2 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl leading-[1.2] mb-3 sm:mb-4 font-bold text-white drop-shadow-lg'>
+                                <span className="text-blue-600 hover:text-blue-700 transition-colors duration-200">Ziz</span>la you'll love. Prices you'll trust.
                             </h2>
                             <div className='text-white/90 text-sm font-medium mb-4 sm:mb-6 drop-shadow-md'>
                                 <p>Starts from</p>

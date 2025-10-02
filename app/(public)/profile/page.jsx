@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
+import { clearCart } from "@/lib/features/cart/cartSlice"
 import { User, MapPin, ShoppingBag, Heart, Settings, LogOut, Edit, Plus, Trash2, Eye } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -54,6 +55,7 @@ export default function ProfilePage() {
 
     const handleLogout = () => {
         localStorage.removeItem('user')
+        dispatch(clearCart()) // Clear cart when user logs out
         toast.success('Logged out successfully')
         router.push('/auth/login')
     }

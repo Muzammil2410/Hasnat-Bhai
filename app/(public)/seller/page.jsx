@@ -27,7 +27,7 @@ export default function SellerChoicePage() {
                             Become a Seller
                         </h1>
                         <p className="text-gray-600">
-                            Join Basirota and start selling your products to thousands of customers
+                            Join Zizla and start selling your products to thousands of customers
                         </p>
                     </div>
 
@@ -79,7 +79,7 @@ export default function SellerChoicePage() {
                     {/* Additional Info */}
                     <div className="mt-8 pt-6 border-t border-gray-200">
                         <div className="text-center">
-                            <h4 className="text-lg font-semibold text-gray-800 mb-4">Why choose Basirota for selling?</h4>
+                            <h4 className="text-lg font-semibold text-gray-800 mb-4">Why choose Zizla for selling?</h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                 <div className="text-center">
                                     <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
