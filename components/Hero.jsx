@@ -36,21 +36,21 @@ const Hero = () => {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     <div className='relative z-10 p-4 sm:p-8 xl:p-16 flex flex-col justify-center h-full'>
-                        <div className='relative z-20 max-w-xs sm:max-w-md lg:max-w-lg'>
-                            <div className='inline-flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur-sm border border-gray-200 text-gray-700 pr-3 sm:pr-4 p-1 rounded-full text-xs sm:text-sm hover:bg-blue-50 hover:border-blue-200 hover:text-blue-800 transition-all duration-200 mb-3 sm:mb-4'>
-                                <span className='bg-blue-600 px-2 sm:px-3 py-1 rounded-full text-white text-xs'>NEWS</span> 
+                        <div className='relative z-20 max-w-full sm:max-w-md lg:max-w-lg hidden sm:block'>
+                            <div className='inline-flex items-center gap-2 sm:gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 text-gray-700 pr-3 sm:pr-4 p-1.5 sm:p-1 rounded-full text-xs sm:text-sm hover:bg-blue-50 hover:border-blue-200 hover:text-blue-800 transition-all duration-200 mb-4 sm:mb-4 shadow-sm'>
+                                <span className='bg-blue-600 px-2.5 sm:px-3 py-1 rounded-full text-white text-xs font-semibold'>NEWS</span> 
                                 <span className='hidden sm:inline'>Free Shipping on Orders Above $150!</span>
-                                <span className='sm:hidden'>Free Shipping Above $150!</span>
+                                <span className='sm:hidden font-medium'>Free Shipping Above $150!</span>
                                 <ChevronRightIcon className='group-hover:ml-2 transition-all' size={14} />
                             </div>
-                            <h2 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl leading-[1.2] mb-3 sm:mb-4 font-bold text-white drop-shadow-lg'>
+                            <h2 className='text-2xl sm:text-2xl md:text-3xl xl:text-4xl leading-[1.1] sm:leading-[1.2] mb-3 sm:mb-4 font-bold text-gray-900 drop-shadow-sm'>
                                 <span className="text-blue-600 hover:text-blue-700 transition-colors duration-200">Ziz</span>la you'll love. Prices you'll trust.
                             </h2>
-                            <div className='text-white/90 text-sm font-medium mb-4 sm:mb-6 drop-shadow-md'>
-                                <p>Starts from</p>
-                                <p className='text-2xl sm:text-3xl font-bold'>{currency}4.90</p>
+                            <div className='text-gray-800 text-base sm:text-sm font-semibold mb-3 sm:mb-4 drop-shadow-sm'>
+                                <p className='text-gray-700'>Starts from</p>
+                                <p className='text-3xl sm:text-3xl font-bold text-blue-600'>{currency}4.90</p>
                             </div>
-                            <button className='bg-blue-600 text-white text-sm py-2.5 px-6 sm:py-3 sm:px-8 xl:py-5 xl:px-12 rounded-md hover:bg-blue-700 hover:scale-105 active:scale-95 transition-all duration-200 w-fit shadow-lg'>LEARN MORE</button>
+                            <button className='bg-gradient-to-r from-blue-600 to-blue-700 text-white text-base sm:text-sm font-semibold py-3.5 px-8 sm:py-3 sm:px-8 xl:py-5 xl:px-12 rounded-xl hover:from-blue-700 hover:to-blue-800 hover:scale-105 active:scale-95 transition-all duration-200 w-fit shadow-xl hover:shadow-2xl border border-blue-500/20'>LEARN MORE</button>
                         </div>
                     </div>
                     {/* Slider indicators */}
