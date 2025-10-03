@@ -96,8 +96,37 @@ export default function SellerDashboard() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          {/* Mobile Layout */}
+          <div className="block sm:hidden">
+            <div className="mb-4">
+              <h1 className="text-xl font-bold text-gray-900">Seller Dashboard</h1>
+              <p className="text-sm text-gray-600">Welcome back, {sellerData.fullName}!</p>
+            </div>
+            <div className="flex flex-col space-y-3">
+              <button 
+                onClick={() => router.push('/seller/dashboard/products/add')}
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Plus size={20} />
+                <span>Add Product</span>
+              </button>
+              <button className="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                <Eye size={20} />
+                <span>View Store</span>
+              </button>
+              <button 
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-red-300 text-red-700 rounded-lg hover:bg-red-50 transition-colors"
+              >
+                <LogOut size={20} />
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden sm:flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Seller Dashboard</h1>
               <p className="text-gray-600">Welcome back, {sellerData.fullName}!</p>
@@ -126,21 +155,21 @@ export default function SellerDashboard() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Welcome Message */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-6 text-white mb-8">
-          <h2 className="text-xl font-semibold mb-2">Welcome to Zizla Seller Center!</h2>
-          <p className="text-blue-100">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-4 sm:p-6 text-white mb-6 sm:mb-8">
+          <h2 className="text-lg sm:text-xl font-semibold mb-2">Welcome to Zizla Seller Center!</h2>
+          <p className="text-sm sm:text-base text-blue-100">
             Your seller account has been created successfully. You can now start adding products and managing your store.
           </p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {stats.map((stat, index) => {
             const Icon = stat.icon
             return (
-              <div key={index} className="bg-white rounded-lg shadow-sm p-6">
+              <div key={index} className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-600">{stat.title}</p>
@@ -156,10 +185,10 @@ export default function SellerDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
           {/* Recent Activity */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Recent Activity</h3>
             <div className="space-y-4">
               <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -179,8 +208,8 @@ export default function SellerDashboard() {
           </div>
 
           {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Quick Actions</h3>
             <div className="space-y-3">
               <button 
                 onClick={() => router.push('/seller/dashboard/products/add')}
@@ -214,9 +243,9 @@ export default function SellerDashboard() {
         </div>
 
         {/* Business Info */}
-        <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Business Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="mt-6 sm:mt-8 bg-white rounded-lg shadow-sm p-4 sm:p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Your Business Information</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <h4 className="font-medium text-gray-700 mb-2">Business Details</h4>
               <p className="text-sm text-gray-600">Name: {sellerData.businessName || 'Not provided'}</p>

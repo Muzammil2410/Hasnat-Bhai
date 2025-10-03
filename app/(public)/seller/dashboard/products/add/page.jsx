@@ -218,8 +218,52 @@ export default function AddProduct() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          {/* Mobile Layout */}
+          <div className="block sm:hidden">
+            <div className="flex items-center justify-between mb-4">
+              <button
+                onClick={handleCancel}
+                className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"
+              >
+                <ArrowLeft size={20} />
+                <span className="text-sm">Back</span>
+              </button>
+            </div>
+            <div className="mb-4">
+              <h1 className="text-xl font-bold text-gray-900">Add New Product</h1>
+              <p className="text-sm text-gray-600">Create a new product for your store</p>
+            </div>
+            <div className="flex flex-col space-y-3">
+              <button
+                onClick={handleSaveDraft}
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                <Save size={20} />
+                <span>Save Draft</span>
+              </button>
+              <button
+                onClick={handlePublish}
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Publishing...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={20} />
+                    <span>Publish Product</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden sm:flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleCancel}
@@ -263,18 +307,18 @@ export default function AddProduct() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
           {/* Form Section */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-8">
             {/* Basic Details */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
                 <Package className="w-5 h-5 mr-2 text-blue-600" />
                 Basic Details
               </h2>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Product Title *</label>
                   <input
@@ -300,7 +344,7 @@ export default function AddProduct() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Category *</label>
                     <select
@@ -333,8 +377,8 @@ export default function AddProduct() {
             </div>
 
             {/* Pricing & Inventory */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
                 <DollarSign className="w-5 h-5 mr-2 text-green-600" />
                 Pricing & Inventory
               </h2>
@@ -398,13 +442,13 @@ export default function AddProduct() {
             </div>
 
             {/* Shipping Details */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
                 <Truck className="w-5 h-5 mr-2 text-orange-600" />
                 Shipping Details
               </h2>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Weight (kg) *</label>
                   <input
@@ -423,7 +467,7 @@ export default function AddProduct() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Dimensions (cm)</label>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     <div>
                       <label className="block text-xs text-gray-500 mb-1">Length</label>
                       <input
@@ -466,13 +510,13 @@ export default function AddProduct() {
             </div>
 
             {/* Media */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
                 <ImageIcon className="w-5 h-5 mr-2 text-purple-600" />
                 Media
               </h2>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {/* Image Upload */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Product Images * (Max 8)</label>
@@ -501,7 +545,7 @@ export default function AddProduct() {
                   {formData.images.length > 0 && (
                     <div className="mt-4">
                       <p className="text-sm font-medium text-gray-700 mb-3">Uploaded Images ({formData.images.length}/8)</p>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
                         {formData.images.map((image, index) => (
                           <div
                             key={image.id}
@@ -557,13 +601,13 @@ export default function AddProduct() {
             </div>
 
             {/* Description */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
                 <FileText className="w-5 h-5 mr-2 text-indigo-600" />
                 Description
               </h2>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Short Description</label>
                   <input
@@ -589,13 +633,13 @@ export default function AddProduct() {
             </div>
 
             {/* Meta/SEO */}
-            <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+            <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4 sm:mb-6 flex items-center">
                 <Search className="w-5 h-5 mr-2 text-teal-600" />
                 Meta / SEO (Optional)
               </h2>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
                   <input
@@ -635,7 +679,7 @@ export default function AddProduct() {
           {/* Preview Section */}
           <div className="lg:col-span-1">
             <div className="sticky top-8">
-              <div className="bg-white rounded-lg shadow-sm p-6">
+              <div className="bg-white rounded-lg shadow-sm p-4 sm:p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Product Preview</h3>
                 
                 <div className="border border-gray-200 rounded-lg overflow-hidden">
