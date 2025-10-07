@@ -1,12 +1,42 @@
 'use client'
-import { ArrowRight, StarIcon } from "lucide-react"
+import { ArrowRight, StarIcon, Send } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import toast from 'react-hot-toast'
 
 const ProductDescription = ({ product }) => {
 
     const [selectedTab, setSelectedTab] = useState('Description')
+    const [newReview, setNewReview] = useState('')
+    const [newRating, setNewRating] = useState(0)
+    const [reviews, setReviews] = useState(product?.rating || [])
+
+    const handleSendReview = () => {
+        if (!newReview.trim()) {
+            toast.error('Please write a review')
+            return
+        }
+        if (newRating === 0) {
+            toast.error('Please select a rating')
+            return
+        }
+
+        const review = {
+            rating: newRating,
+            review: newReview,
+            user: {
+                name: 'You',
+                image: '/profile_pic1.jpg' // Default profile image
+            },
+            createdAt: new Date().toISOString()
+        }
+
+        setReviews([review, ...reviews])
+        setNewReview('')
+        setNewRating(0)
+        toast.success('Review submitted successfully!')
+    }
 
     return (
         <div className="my-18 text-sm text-slate-600">
@@ -28,7 +58,43 @@ const ProductDescription = ({ product }) => {
             {/* Reviews */}
             {selectedTab === "Reviews" && (
                 <div className="flex flex-col gap-3 mt-14">
-                    {product.rating.map((item,index) => (
+                    {/* Review Input Section */}
+                    <div className="mb-6">
+                        <div className="flex items-center gap-1 mb-3">
+                            {Array(5).fill('').map((_, index) => (
+                                <StarIcon 
+                                    key={index} 
+                                    size={18} 
+                                    className={`cursor-pointer mt-0.5 ${
+                                        newRating >= index + 1 
+                                            ? 'text-transparent fill-current' 
+                                            : 'text-transparent'
+                                    }`}
+                                    style={{ fill: newRating >= index + 1 ? "#FCD34D" : "#D1D5DB" }}
+                                    onClick={() => setNewRating(index + 1)}
+                                />
+                            ))}
+                        </div>
+                        <div className="flex gap-2">
+                            <textarea
+                                value={newReview}
+                                onChange={(e) => setNewReview(e.target.value)}
+                                placeholder="Write your review..."
+                                className="flex-1 p-2 border border-slate-300 rounded text-sm text-slate-600 focus:outline-none focus:border-slate-400"
+                                rows={2}
+                            />
+                            <button
+                                onClick={handleSendReview}
+                                className="bg-slate-700 text-white px-4 py-2 rounded hover:bg-slate-800 transition-colors flex items-center gap-1 text-sm"
+                            >
+                                <Send size={14} />
+                                Send
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Reviews List */}
+                    {reviews.map((item,index) => (
                         <div key={index} className="flex gap-5 mb-10">
                             <Image src={item.user.image} alt="" className="size-10 rounded-full" width={100} height={100} />
                             <div>
